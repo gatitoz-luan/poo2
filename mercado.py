@@ -1,3 +1,6 @@
+# Mercado é um local onde as pessoas compram diversos produtos, os produtos possuem preços e quantidades,
+# novos produtos podem ser adicionados, como também podem ser removidos.
+
 class mercado():
     def produtos():
         produtos = {"banana":2, "queijo":3, "pão":1}
