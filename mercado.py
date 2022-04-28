@@ -15,9 +15,11 @@ class mercado():
                 nome = input('produto: ')
                 quantidade = input('quantidade: ')
                 produtos[nome]= quantidade
-                print('produto adicionado')
-                print(produtos)   #teste
                 continuar= input('continuar: S/N ')
+
+                print('produto adicionado')
+                #print(produtos)   #teste
+                
                 if 'N' in continuar.upper():
                     break
                 elif continuar.upper() != 'S':
@@ -33,10 +35,11 @@ class mercado():
                 nome = input('produto: ')
                 if nome in produtos.keys():
                     del produtos[nome]
-                print(nome,' deletado')
-                print(produtos)   #teste
                 continuar= input('continuar: S/N ')
-                
+
+                print(nome,' deletado')
+                #print(produtos)   #teste
+                                
                 if 'N' in continuar.upper():
                     break
                 elif continuar.upper() != 'S':
@@ -49,57 +52,77 @@ class mercado():
                     
     class pessoas():
         class funcionarios():
-            def horario(horario):
+            def todos():
+                #nome=(hora de entrada, saída, id)
+                ana=(8,12,1,'ana')
+                joao=(9,15,2,'joao')
+                jose=(11,18,3,'jose')
+                alberto=(15,17,4,'alberto')
+                luis=(16,20,5,'luis')
+                tadeu=(17,20,6,'tadeu')
+                lista=[ana,joao,jose,alberto,luis,tadeu]
+                return lista
+                
+            def horario(horario,lista):
                 abertos=0
-                ana=(8,12)
-                joao=(9,15)
-                jose=(11,18)
-                alberto=(15,17)
-                luis=(16,20)
-                tadeu=(17,20)
                 
-                if ana[0]<=horario<ana[1]:
-                    abertos+=1
-                
-                if joao[0]<=horario<joao[1]:
-                    abertos+=1
-                
-                if jose[0]<=horario<jose[1]:
-                    abertos+=1
-                    
-                if alberto[0]<=horario<alberto[1]:
-                    abertos+=1
-                    
-                if luis[0]<=horario<luis[1]:
-                    abertos+=1
-                
-                if tadeu[0]<=horario<tadeu[1]:
-                    abertos+=1
+                for c in range(len(lista)):
+                    if lista[c][0]<=horario<lista[c][1]:
+                        abertos+=1
                 return abertos
-            def info():
+
+            def exibir():
+                print(
+                '\n id=1 ana'
+                '\n id=2 joao'
+                '\n id=3 jose'
+                '\n id=4 alberto'
+                '\n id=5 luis'
+                '\n id=6 tadeu'
+                '\n'
+                '\n'
+                '\n'
+                )
+                return
+            def salario(lista):
+                funcionario = int(input("Digite o ID: "))
+                for i in range(len(lista)):
+                    if lista[i][2]==funcionario:
+                        entrada= lista[i][0]
+                        saida= lista[i][1]
+                        recebe = (saida-entrada)*28*20     #horas trabalhadas//dias no mês//salario por hora
+                        print()
+                        print(lista[i][3], 'tem o salário de R$', recebe)
+                        print()
+
+                return
             
         class clientes():
             def totais():
+                return
             def media_de_compra():
+                return
             def dados():
+                return
 
 from datetime import datetime
-
-
-
 produtos= mercado.produtos.todos()
-
+lista= mercado.pessoas.funcionarios.todos()
 while True:
+
+    hora= int(datetime.today().strftime('%H'))
+    horario= mercado.pessoas.funcionarios.horario(hora,lista)
+
     print(datetime.today().strftime('%d-%m %H:%M'))
     print("------------------------------------------------------")
     print('(1)Ver produtos disponíveis')
     print('(2)Adicionar produtos novos')
     print('(3)Remover produtos')
+    print('(4)Ver funcionarios')
+    print('(5)salario do funcionario')
     print('(0)Sair')
+    print("Neste horário há", horario ,"caixas abertos")
     
-    hora= datetime.today().strftime('%H')
-    horario= mercado.pessoas.funcionarios.horario(hora)
-    print("Neste horário há", abertos(horario) ,"caixas abertos")
     opcao = input()
     
     if opcao=="0":
@@ -110,5 +133,10 @@ while True:
         mercado.produtos.inserir(produtos)
     elif opcao=="3":
         mercado.produtos.deletar()
+    elif opcao=="4":
+        mercado.pessoas.funcionarios.exibir()
+    elif opcao=="5":
+        mercado.pessoas.funcionarios.exibir()       #!IMPORTANTE
+        mercado.pessoas.funcionarios.salario(lista)
     else:
         print("///////////////////opção inválida///////////////////")
