@@ -4,7 +4,7 @@ class baralho:
     
     jogadores = 9
     cartasNumero = ['A','2','3','4','5','6','7','8','9','J','Q','K']
-    cartasNaipe = ['paus','ouro','espadas', 'copa']
+    cartasNaipe = ['paus','ouro','espadas', 'copas']
     cartasSeparadas = []
 
     for a in range(len(cartasNumero)):
@@ -31,14 +31,33 @@ class baralho:
         cartas = embaralhadas
         decks = []
         deckIndividual = []
+        deckInicial = []
         jogam = baralho.jogadores
+        cartasTotal = baralho.cartasTotal
+        jogadoresComCartas = 0
         
-        for i in range(jogam):
-            decks.append(deckIndividual)
-    
-        for j in range(baralho.cartasTotal):
-            for g in range(len(jogam)):
-        pass
+
+        while True:
+            
+            for j in range(cartasTotal//jogam):
+                cartaMovida = cartas[random.randrange(0,len(cartas))]
+                deckIndividual.append(cartaMovida)
+                cartas.remove(cartaMovida)
+                #print(cartaMovida)
+
+            deckInicial = deckIndividual.copy()
+            decks.append(deckInicial)
+            deckIndividual.clear()
+            jogadoresComCartas +=1
+            #print(deckInicial)
+
+            if len(cartas)==(cartasTotal%jogam):
+                for x in range(len(cartas), 0 , -1):
+                    cartaMovida = cartas[random.randrange(0,len(cartas))]
+                    decks[x].append(cartaMovida)
+                break
+        print(decks)
+        
 
 
 
