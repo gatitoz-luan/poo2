@@ -268,8 +268,6 @@ class Bispo:
 				break
 		return l
 
-
-
 	def tipo(self):
 		return 'bispo'
 
@@ -301,8 +299,6 @@ class Peao:
 		and tabuleiro.playerPecaNaPosicao((x-incrementoPlayer,y+incrementoPlayer)) != self.jogador):
 			l.append([['peao',posicao,(x-incrementoPlayer,y+incrementoPlayer)]])
 		return l
-
-
 
 	def tipo(self):
 		return 'peao'
