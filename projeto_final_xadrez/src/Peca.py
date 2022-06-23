@@ -46,7 +46,7 @@ class Rainha:
 			if (y+i)>7:
 				break;
 			if (not tabuleiro.temPecaNaPosicao((x,y+i))):
-				 l.append([['rainha',posicao,(x,y+i)]])
+				l.append([['rainha',posicao,(x,y+i)]])
 			elif (tabuleiro.playerPecaNaPosicao((x,y+i))!=self.jogador):
 				l.append([['rainha',posicao,(x,y+i)]])
 				break
@@ -92,7 +92,7 @@ class Rainha:
 			if (x-i)<0 or (y+i)>7:
 				break;
 			if (not tabuleiro.temPecaNaPosicao((x-i,y+i))):
-				 l.append([['rainha',posicao,(x-i,y+i)]])
+				l.append([['rainha',posicao,(x-i,y+i)]])
 			elif (tabuleiro.playerPecaNaPosicao((x-i,y+i))!=self.jogador):
 				l.append([['rainha',posicao,(x-i,y+i)]])
 				break
@@ -149,7 +149,7 @@ class Torre:
 			if (y+i)>7:
 				break;
 			if (not tabuleiro.temPecaNaPosicao((x,y+i))):
-				 l.append([['torre',posicao,(x,y+i)]])
+				l.append([['torre',posicao,(x,y+i)]])
 			elif (tabuleiro.playerPecaNaPosicao((x,y+i))!=self.jogador):
 				l.append([['torre',posicao,(x,y+i)]])
 				break
@@ -173,9 +173,9 @@ class Cavalo:
 			if(x+incx>7 or x+incx<0 or y+incy>7 or y+incy<0):
 				continue
 			if (not tabuleiro.temPecaNaPosicao((x+incx,y+incy))):
-        			l.append([['cavalo',posicao,(x+incx,y+incy)]])
+				l.append([['cavalo',posicao,(x+incx,y+incy)]])
 			elif (tabuleiro.playerPecaNaPosicao((x+incx,y+incy))!=self.jogador):
-        			l.append([['cavalo',posicao,(x+incx,y+incy)]])
+				l.append([['cavalo',posicao,(x+incx,y+incy)]])
 		return l
 	def tipo(self):
 		return 'cavalo'
@@ -196,9 +196,9 @@ class Rei:
 			if(x+incx>7 or x+incx<0 or y+incy>7 or y+incy<0):
 				continue
 			if (not tabuleiro.temPecaNaPosicao((x+incx,y+incy))):
-        			l.append([['rei',posicao,(x+incx,y+incy)]])
+				l.append([['rei',posicao,(x+incx,y+incy)]])
 			elif (tabuleiro.playerPecaNaPosicao((x+incx,y+incy))!=self.jogador):
-        			l.append([['rei',posicao,(x+incx,y+incy)]])
+				l.append([['rei',posicao,(x+incx,y+incy)]])
 		return l
 
 
@@ -261,15 +261,13 @@ class Bispo:
 			if (x-i)<0 or (y+i)>7:
 				break;
 			if (not tabuleiro.temPecaNaPosicao((x-i,y+i))):
-				 l.append([['bispo',posicao,(x-i,y+i)]])
+				l.append([['bispo',posicao,(x-i,y+i)]])
 			elif (tabuleiro.playerPecaNaPosicao((x-i,y+i))!=self.jogador):
 				l.append([['bispo',posicao,(x-i,y+i)]])
 				break
 			else:
 				break
 		return l
-
-
 
 	def tipo(self):
 		return 'bispo'
@@ -293,21 +291,18 @@ class Peao:
 		#captura para a direita
 		if(0<=x+incrementoPlayer<=7 and 0<=y+incrementoPlayer<=7 \
 		and tabuleiro.temPecaNaPosicao((x+incrementoPlayer,y+incrementoPlayer))\
-		   and tabuleiro.playerPecaNaPosicao((x+incrementoPlayer,y+incrementoPlayer)) != self.jogador):
+		and tabuleiro.playerPecaNaPosicao((x+incrementoPlayer,y+incrementoPlayer)) != self.jogador):
 			l.append([['peao',posicao,(x+incrementoPlayer,y+incrementoPlayer)]])
 
 		#captura para a esquerda
 		if(0<=x-incrementoPlayer<=7 and 0<=y+incrementoPlayer<=7
-		   and tabuleiro.temPecaNaPosicao((x-incrementoPlayer,y+incrementoPlayer))\
-		   and tabuleiro.playerPecaNaPosicao((x-incrementoPlayer,y+incrementoPlayer)) != self.jogador):
+		and tabuleiro.temPecaNaPosicao((x-incrementoPlayer,y+incrementoPlayer))\
+		and tabuleiro.playerPecaNaPosicao((x-incrementoPlayer,y+incrementoPlayer)) != self.jogador):
 			l.append([['peao',posicao,(x-incrementoPlayer,y+incrementoPlayer)]])
 		return l
 
-
-
 	def tipo(self):
 		return 'peao'
-
 
 
 
