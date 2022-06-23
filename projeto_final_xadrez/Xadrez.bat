@@ -1,2 +1,0 @@
-cd exec
-Xadrez.exe
