@@ -1,9 +1,7 @@
 import pygame
 
-#temporario --------------------------------------------------------
 from Tabuleiro import *
 from IA import*
-#from Tabuleiro.Tabuleiro import Tabuleiro
 
 pecasPretas = []
 pecasBrancas = []
@@ -496,7 +494,7 @@ def interface():
                         estado = TELA_OPCOES
                         desenha_opcoes(tela)
                     if ((pos[0]>= 370.5 and pos[0]<= 529.5) and (pos[1] >= 336 and pos[1] <= 392)): #detecta "SAIR"
-                          running = False
+                        running = False
                     continue #Evitar que o mesmo evento ocorra para telas diferentes
 
             if estado == TELA_OPCOES:
@@ -645,10 +643,10 @@ def interface():
                                 eValido = False
                                 if jogador1 == PRETAS:
                                     eValido = criaBlkVerdes(dic, pos_peca, tab,
-                                                  True) #Boolean -> se tabuleiro está invertido
+                                    True) #Boolean -> se tabuleiro está invertido
                                 else:
                                     eValido = criaBlkVerdes(dic, pos_peca, tab,
-                                                  False)  # Boolean -> se tabuleiro não está invertido
+                                    False)  # Boolean -> se tabuleiro não está invertido
 
                                 if eValido:
                                     estado = MOVIMENTO_JOGADOR
@@ -690,10 +688,10 @@ def interface():
                                     eValido = False
                                     if jogador1 == PRETAS:
                                         eValido = criaBlkVerdes(dic, pos_peca, tab,
-                                                      True) #Boolean -> se tabuleiro está invertido
+                                        True) #Boolean -> se tabuleiro está invertido
                                     else:
                                         eValido = criaBlkVerdes(dic, pos_peca, tab,
-                                                      False)  # Boolean -> se tabuleiro não está invertido
+                                        False)  # Boolean -> se tabuleiro não está invertido
 
                                     if eValido:
                                         estado = MOVIMENTO_JOGADOR
