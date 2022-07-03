@@ -3,7 +3,7 @@ import random
 class baralho:
     def __init__(self,jogam):        
         self.players = jogam  
-        cartasNumero = ['A','2','3','4','5','6','7','8','9','J','Q','K']
+        cartasNumero = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
         cartasNaipe = ['♠️','♥️','♦️', '♣️']
         cartasSeparadas = []
         self.tot_cartas = 0 
