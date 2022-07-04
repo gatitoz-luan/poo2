@@ -31,8 +31,27 @@ class baralho:
 
         for t in range(5):
             mesa.append(cartas[t])
-
         return [decks, mesa]
+
+    def nova_partida(lista):
+        mesa = []
+        get = baralho(len(lista))
+        cartas = get.cartasEmbaralhadas  
+
+
+        for j in range(len(lista)):                                
+            cartaMovida = cartas[0]
+            lista[j][2]=cartaMovida
+            cartas.remove(cartaMovida)
+        for j in range(len(lista)):                                
+            cartaMovida = cartas[0]
+            lista[j][3]=cartaMovida
+            cartas.remove(cartaMovida)
+
+        for t in range(5):
+            mesa.append(cartas[t])
+        return [lista, mesa]
+        
 
 
 

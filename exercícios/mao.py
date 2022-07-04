@@ -215,9 +215,9 @@ class verifica:
         if len(cartas)<5:
             return False
         combina = []
-        for e in range(7):
+        for e in range(len(cartas)):
             conta=0
-            for d in range(7):
+            for d in range(len(cartas)):
                 if cartas[d][0] == cartas[e][0]:
                     conta+=1
             combina.append(cartas[e][0])
@@ -241,7 +241,7 @@ class verifica:
         ideal = [['A♠️','2♠️','3♠️','4♠️','5♠️','6♠️','7♠️','8♠️','9♠️','10♠️','J♠️','Q♠️','K♠️'],['A♥️','2♥️','3♥️','4♥️','5♥️','6♥️','7♥️','8♥️','9♥️','10♥️','J♥️','Q♥️','K♥️'],['A♦️','2♦️','3♦️','4♦️','5♦️','6♦️','7♦️','8♦️','9♦️','10♦️','J♦️','Q♦️','K♦️'],['A♣️','2♣️','3♣️','4♣️','5♣️','6♣️','7♣️','8♣️','9♣️','10♣️','J♣️','Q♣️','K♣️']]
         for a in range(4):
             conta=0
-            for b in range(7):
+            for b in range(len(cartas)):
                 if cartas[b] in ideal[a]:
                     conta+=1
             if conta > 4:
@@ -254,7 +254,7 @@ class verifica:
         if len(cartas)<5:
             return False
         lista = []
-        for v in range(7):
+        for v in range(len(cartas)):
             lista.append(cartas[v][0])
         unicos = []
         for numero in lista:
