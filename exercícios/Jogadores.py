@@ -52,14 +52,14 @@ class IA():
                         print(f'{lista[0]} apostou {aposta}')
                     else:
                         aposta = mesa[0][0]
-                        print(f'{lista[0]} pagou')
+                        print(f'{lista[0]} pagou a aposta')
                 else:
                     if x>7:
                         aposta = mesa[0][0]
                         print(f'{lista[0]} apostou {aposta}')
                     else:
                         aposta = lista[1]/5*1
-                        print(f'{lista[0]} pagou')
+                        print(f'{lista[0]} pagou a aposta')
             else:
                 print(f'{lista[0]} desistiu')
                 aposta = 0
