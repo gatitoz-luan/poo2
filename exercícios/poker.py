@@ -8,7 +8,12 @@ class jogo():
         self.rodada = 0
         self.game = Jogadores.IA()
     def players():
-        jogadores = input('Número de desafiantes: ')
+        while True:
+            jogadores = input('Número de desafiantes: ')
+            if int(jogadores) > 1 and int(jogadores)<8:
+                break
+            print('!!!VALOR INVALIDO, TENTE NOVAMENTE!!!')
+            
         jogadores=int(jogadores)+1
         return jogadores
 
@@ -21,14 +26,16 @@ class jogo():
         lista = Jogadores.IA.get_players()
         for i in range(len(lista)):
                 lista[i].append(0)  #apostas
-                lista[i].append(1)  #para ativos no torneio
-        for c in range(5):
+                lista[i].append(1)  #para ativos na torneio
+        for c in range(3):
             if c == 2:
                 print('--------Preparando Torneio--------')
             print('.')
             time.sleep(1)
         
         while True:
+            quebra = 0
+            print(lista)
             for j in range (len(lista)):
                 if lista[j][1] > 0:
                     lista[j][5] = 1
@@ -49,7 +56,11 @@ class jogo():
                 print(f'saldo do {lista[d][0]} é {lista[d][1]}')
                 time.sleep(0.5)
 
+
+
             for rodada in range(4):
+                for c in range(len(lista)):
+                    lista[c][4]=0
                 
                 if rodada == 0:
                     maos = Jogadores.IA.get_maos()
@@ -66,24 +77,30 @@ class jogo():
                     print(f'{lista[small_blind[0]][0]} pagou {small_blind[1]}')
                     time.sleep(1)
                     print(f'{lista[big_blind[0]][0]} pagou {big_blind[1]}')
-                else:
+                elif quebra == 0:
                     for saldo in range(len(lista)):
                         print(f'saldo do {lista[saldo][0]} é {lista[saldo][1]}')
-                    time.sleep(0.5)
+                    time.sleep(1)
                 if rodada == 1:
                     mesa_on[1].extend(mesa[0:3])
                 if rodada == 2:
                     mesa_on[1].append(mesa[3])
                 if rodada == 3:
                     mesa_on[1].append(mesa[4])
+
+
+                
                 while True:
                     for i in range(joga,len(lista)):
+                        if mesa_on[0][0]== lista[i][4]:
+                            quebra=1
+                            break
                         time.sleep(1)
-                        if lista[i][5] == 1:
+                        if lista[i][5] == 1 and lista[i][1]>0:
                             if len(mesa_on[1])>0:
                                 print(mesa_on[1])
-                            print(f'Aposta: {mesa_on[0][0]}')
-                            print(f'Prêmio: {mesa_on[0][1]}')
+                            print(f'Aposta: {mesa_on[0][0]:.0f}')
+                            print(f'Prêmio: {mesa_on[0][1]:.0f}')
                             time.sleep(1)
                             if lista[i][0] != 'Player':
                                 jogou = Jogadores.IA.bot(mesa_on,lista[i])
@@ -92,7 +109,7 @@ class jogo():
                                     mesa_on[0] = jogou[0]
                             elif lista[i][0] == 'Player':
                                 print(f'Mão: |{maos[0][2]}| |{maos[0][3]}|')
-                                print(f'Saldo: {maos[0][1]} coins')
+                                print(f'Saldo: {maos[0][1]:.0f} coins')
                                 print('[1] Desistir     [2] Pagar   [3] Apostar')
                                 
                                 aposta = 0
@@ -100,12 +117,12 @@ class jogo():
                                     opcao = input('digite: ')
                                     if opcao == '1':
                                         print('Desisto')
-                                        aposta = 0
+                                        aposta = mesa_on[0][0]
                                         lista[0][5] = 0
                                         break
                                     elif opcao == '2':
                                         print('Paguei')
-                                        aposta = mesa_on[0][0]
+                                        aposta = 0
                                         break
                                     elif opcao == '3':
                                         while True:
@@ -120,67 +137,75 @@ class jogo():
 
                                 lista[0][4] += aposta
                                 lista[0][1] -= aposta
-                                mesa_on[0][0]=aposta
+                                if aposta > 0:
+                                    mesa_on[0][0]=aposta
+                                else:
+                                    mesa_on[0][0]=mesa_on[0][0]
                                 mesa_on[0][1]+=aposta
 
-
-                    for i in range(joga):
-                        time.sleep(1)
-                        if lista[i][5] == 1:
-                            if len(mesa_on[1])>0:
-                                print(mesa_on[1])
-                            print(f'Aposta: {mesa_on[0][0]}')
-                            print(f'Prêmio: {mesa_on[0][1]}')
-                            time.sleep(1)
-                            if lista[i][0] != 'Player':
-                                jogou = Jogadores.IA.bot(mesa_on,lista[i])
-                                lista[i] = jogou[1]
-                                if jogou[0][0] > 0:
-                                    mesa_on[0] = jogou[0]
-                            elif lista[i][0] == 'Player':
-                                print(f'Mão: |{maos[0][2]}| |{maos[0][3]}|')
-                                print(f'Saldo: {maos[0][1]} coins')
-                                print('[1] Desistir     [2] Pagar   [3] Apostar')
-                                
-                                aposta = 0
-                                while True:
-                                    opcao = input('digite: ')
-                                    if opcao == '1':
-                                        print('Desisto')
-                                        aposta = 0
-                                        lista[0][5] = 0
-                                        break
-                                    elif opcao == '2':
-                                        print('Paguei')
-                                        aposta = mesa_on[0][0]
-                                        break
-                                    elif opcao == '3':
-                                        while True:
-                                            aposta = int(input('valor: '))
-                                            if aposta > mesa_on[0][0] and aposta < lista[0][1]:
-                                                print(f'Apostei {aposta}')
-                                                break
-                                            else:
-                                                print('!!!VALOR INVALIDO, TENTE NOVAMENTE!!!')
-                                        break
-                                    print('!!!VALOR INVALIDO, TENTE NOVAMENTE!!!')
-
-                                lista[0][4] += aposta
-                                lista[0][1] -= aposta
-                                mesa_on[0][0]=aposta
-                                mesa_on[0][1]+=aposta
-                    apostaram = 0
-                    on = 0
-                    for k in range(len(lista)):
-                        if lista[k][5] == 1:
-                            print(lista)
-                            print(lista[k][4])
-                            print(mesa_on[0][0])
-                            if lista[k][4] == mesa_on[0][0]:
-                                apostaram+=1
-                            on+=1
-                    if on==apostaram :
+ 
+                    if quebra == 1:
                         break
+
+
+
+                    for i in range(0,joga):
+                        if mesa_on[0][0]== lista[i][4]:
+                            quebra=1
+                            break
+                        time.sleep(1)
+                        if lista[i][5] == 1 and lista[i][1]>0:
+                            if len(mesa_on[1])>0:
+                                print(mesa_on[1])
+                            print(f'Aposta: {mesa_on[0][0]:.0f}')
+                            print(f'Prêmio: {mesa_on[0][1]:.0f}')
+                            time.sleep(1)
+                            if lista[i][0] != 'Player':
+                                jogou = Jogadores.IA.bot(mesa_on,lista[i])
+                                lista[i] = jogou[1]
+                                if jogou[0][0] > 0:
+                                    mesa_on[0] = jogou[0]
+                            elif lista[i][0] == 'Player':
+                                print(f'Mão: |{maos[0][2]}| |{maos[0][3]}|')
+                                print(f'Saldo: {maos[0][1]:.0f} coins')
+                                print('[1] Desistir     [2] Pagar   [3] Apostar')
+                                
+                                aposta = 0
+                                while True:
+                                    opcao = input('digite: ')
+                                    if opcao == '1':
+                                        print('Desisto')
+                                        aposta = mesa_on[0][0]
+                                        lista[0][5] = 0
+                                        break
+                                    elif opcao == '2':
+                                        print('Paguei')
+                                        aposta = 0
+                                        break
+                                    elif opcao == '3':
+                                        while True:
+                                            aposta = int(input('valor: '))
+                                            if aposta > mesa_on[0][0] and aposta < lista[0][1]:
+                                                print(f'Apostei {aposta}')
+                                                break
+                                            else:
+                                                print('!!!VALOR INVALIDO, TENTE NOVAMENTE!!!')
+                                        break
+                                    print('!!!VALOR INVALIDO, TENTE NOVAMENTE!!!')
+
+                                lista[0][4] += aposta
+                                lista[0][1] -= aposta
+                                if aposta > 0:
+                                    mesa_on[0][0]=aposta
+                                else:
+                                    mesa_on[0][0]=mesa_on[0][0]
+                                mesa_on[0][1]+=aposta
+                        
+                    if quebra == 1:
+                        break
+
+
+                    
 
 
 
@@ -199,8 +224,8 @@ class jogo():
                     id_vence.append(idx)
             divide = len(id_vence)
             for k in range(divide):
-                lista[id_vence[k]][1] += mesa_on[0][1]
-                print(f'{lista[id_vence[k]][0]} recebeu {mesa_on[0][1]}')
+                lista[id_vence[k]][1] += mesa_on[0][1]//divide
+                print(f'{lista[id_vence[k]][0]} recebeu {mesa_on[0][1]//divide:.0f}')
                 vence = []
                 vence.extend(lista[id_vence[k]][2:4])
                 vence.extend(mesa_on[1])

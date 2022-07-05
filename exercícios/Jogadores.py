@@ -35,33 +35,25 @@ class IA():
         
         if sorte>100:
             aposta = lista[1]
-            print(f'{lista[0]} apostou {aposta}')
         if sorte>50:
             if mesa[0][1]<lista[1]/5*2:
                 aposta = mesa[0][1]
-                print(f'{lista[0]} apostou {aposta}')
             else:
                 aposta = lista[1]/5*2
-                print(f'{lista[0]} apostou {aposta}')
         if sorte<=50:
             x = random.randint(0,10)
             if x>2:
                 if mesa[0][0]<lista[1]/5*1:
                     if x>7:
                         aposta = lista[1]/5*1
-                        print(f'{lista[0]} apostou {aposta}')
                     else:
                         aposta = mesa[0][0]
-                        print(f'{lista[0]} pagou a aposta')
                 else:
                     if x>7:
-                        aposta = mesa[0][0]
-                        print(f'{lista[0]} apostou {aposta}')
+                        aposta = mesa[0][1]
                     else:
-                        aposta = lista[1]/5*1
-                        print(f'{lista[0]} pagou a aposta')
+                        aposta = mesa[0][0]
             else:
-                print(f'{lista[0]} desistiu')
                 aposta = 0
                 lista[5] = 0
 
@@ -70,8 +62,19 @@ class IA():
 
         lista[4] += aposta
         lista[1] -= aposta
-        mesa[0][0]=aposta
-        mesa[0][1]+=aposta
+        if aposta>0:
+            if lista[1]==0:
+                print(f'{lista[0]} deu ALL IN  com seus {aposta:.0f}')
+            elif aposta == mesa[0][0]:
+                print(f'{lista[0]} pagou a aposta')
+            else:
+                print(f'{lista[0]} apostou {aposta:.0f}')
+
+            mesa[0][0]=aposta
+            mesa[0][1]+=aposta
+            
+        else:
+            print(f'{lista[0]} desistiu')
         return [mesa[0], lista]
 
 
