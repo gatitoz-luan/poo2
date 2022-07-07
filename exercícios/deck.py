@@ -36,17 +36,19 @@ class baralho:
     def nova_partida(lista):
         mesa = []
         get = baralho(len(lista))
-        cartas = get.cartasEmbaralhadas  
+        cartas = get.cartasEmbaralhadas
+        random.shuffle(cartas) 
+        
 
 
         for j in range(len(lista)):                                
-            cartaMovida = cartas[0]
+            cartaMovida = cartas[-1]
             lista[j][2]=cartaMovida
-            cartas.remove(cartaMovida)
+            cartas.pop()
         for j in range(len(lista)):                                
-            cartaMovida = cartas[0]
+            cartaMovida = cartas[-1]
             lista[j][3]=cartaMovida
-            cartas.remove(cartaMovida)
+            cartas.pop()
 
         for t in range(5):
             mesa.append(cartas[t])

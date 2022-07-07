@@ -29,9 +29,11 @@ class IA():
         return lista
 
     def bot(mesa,lista):
+        aposta_antes = lista[4]
         aposta = 0
         cartas = lista[2:4]
-        sorte = int(mao.verifica.testes(mesa[1],cartas))
+        recebe = mao.verifica.testes(mesa[1],cartas)
+        sorte = int(recebe[0])
         confiança = random.randint(1,21)
         if confiança==1:
             aposta = 0
@@ -67,23 +69,27 @@ class IA():
                     else:
                         aposta = 0
 
-            if aposta > lista[1]:
-                aposta = lista[1]
+        if aposta > lista[1]:
+            aposta = lista[1]
 
-        lista[4] += aposta
+        lista[4] = aposta+ aposta_antes
         lista[1] -= aposta
         if aposta>0:
             if lista[1]==0:
-                print(f'{lista[0]} deu ALL IN  com seus {aposta:.0f}')
+                print(f'{lista[0]} apostou ALL IN')
             elif aposta == mesa[0][0]:
                 print(f'{lista[0]} pagou a aposta')
             else:
                 print(f'{lista[0]} apostou {aposta:.0f}')
 
-            mesa[0][0]=aposta
+            if aposta == aposta_antes:
+                mesa[0][0]=aposta*2
+            else:
+                mesa[0][0]=aposta
             mesa[0][1]+=aposta
             
         else:
+            lista[5]=0
             print(f'{lista[0]} desistiu')
         return [mesa[0], lista]
 

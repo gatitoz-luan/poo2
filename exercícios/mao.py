@@ -4,160 +4,153 @@ class verifica:
     
     def testes(mesa,mao):
         pontos=0
-        cartas = []
-        cartas.extend(mesa)
+        cartas = mesa
         cartas.extend(mao)
         cartas.sort()
 
-        while True:
-            x = verifica.Royal_flush(cartas)
-            if type(x) is list:
-                pontos = 99999900
-                return pontos
+        x = verifica.Royal_flush(cartas)
+        classe = 'Royal Flush'
+        if type(x) is list:
+            pontos = 99999900
+            return [pontos,classe]
 
-            y = verifica.Straight_flush(cartas)
-            if type(y) is list:
-                if y[0][0]=='A':
-                    pontos = 1999900
-                else:
-                    pontos = int(y[0][0])*1000000
-                return pontos
+        y = verifica.Straight_flush(cartas)
+        classe = 'Straight Flush'
+        if type(y) is list:
+            if y[0][0]=='A':
+                pontos = 1999900
+            else:
+                pontos = int(y[0][0])*1000000
+            return [pontos,classe]
 
-            z = verifica.Quadra(cartas)
-            if type(z) is not bool:
-                if z=='A':
-                    pontos = 990000
-                elif z=='K':
-                    pontos = 980000
-                elif z=='Q':
-                    pontos = 970000
-                elif z=='J':
-                    pontos = 960000
-                elif z=='1':
-                    pontos = 950000
-                else:
-                    pontos = int(z)*100000
-                return pontos
+        z = verifica.Quadra(cartas)
+        classe = 'Quadra'
+        if type(z) is not bool:
+            if z=='A':
+                pontos = 990000
+            elif z=='K':
+                pontos = 980000
+            elif z=='Q':
+                pontos = 970000
+            elif z=='J':
+                pontos = 960000
+            elif z=='1':
+                pontos = 950000
+            else:
+                pontos = int(z)*100000
+            return [pontos,classe]
 
-            j = verifica.Full_House(cartas)
-            if type(j) is list:
-                if j[0]=='A':
-                    pontos = 99000
-                elif j[0]=='K':
-                    pontos = 98000
-                elif j[0]=='Q':
-                    pontos = 97000
-                elif j[0]=='J':
-                    pontos = 96000
-                elif j[0]=='1':
-                    pontos = 95000
-                else:
-                    pontos = int(j[0])*10000
-                if j[1]=='A':
-                    pontos += 99
-                elif j[1]=='K':
-                    pontos += 98
-                elif j[1]=='Q':
-                    pontos += 97
-                elif j[1]=='J':
-                    pontos += 96
-                elif j[1]=='1':
-                    pontos += 95
-                else:
-                    pontos += int(j[1])*10
-                return pontos
+        j = verifica.Full_House(cartas)
+        classe = 'Full House'
+        if type(j) is list:
+            if j[0]=='A':
+                pontos = 99000
+            elif j[0]=='K':
+                pontos = 98000
+            elif j[0]=='Q':
+                pontos = 97000
+            elif j[0]=='J':
+                pontos = 96000
+            elif j[0]=='1':
+                pontos = 95000
+            else:
+                pontos = int(j[0])*10000
+            if j[1]=='A':
+                pontos += 99
+            elif j[1]=='K':
+                pontos += 98
+            elif j[1]=='Q':
+                pontos += 97
+            elif j[1]=='J':
+                pontos += 96
+            elif j[1]=='1':
+                pontos += 95
+            else:
+                pontos += int(j[1])*10
+            return [pontos,classe]
 
-            k = verifica.flush(cartas)
-            if k is True:
-                pontos = 10000
-                return pontos
+        k = verifica.flush(cartas)
+        classe = 'Flush'
+        if k is True:
+            pontos = 10000
+            return [pontos,classe]
 
-            l = verifica.Straight(cartas)
-            if type(l) is int:
-                pontos = l
-                return pontos
+        l = verifica.Straight(cartas)
+        classe = 'Straight'
+        if type(l) is int:
+            pontos = l
+            return [pontos,classe]
 
-            m = verifica.Trinca(cartas)
-            if type(m) is not bool:
-                if m=='A':
-                    pontos = 95
-                elif m=='K':
-                    pontos = 94
-                elif m=='Q':
-                    pontos = 93
-                elif m=='J':
-                    pontos = 92
-                elif m=='1':
-                    pontos = 91
-                else:
-                    pontos = int(m)+90
-                return pontos
+        m = verifica.Trinca(cartas)
+        classe = 'Trinca'
+        if type(m) is not bool:
+            if m=='A':
+                pontos = 95
+            elif m=='K':
+                pontos = 94
+            elif m=='Q':
+                pontos = 93
+            elif m=='J':
+                pontos = 92
+            elif m=='1':
+                pontos = 91
+            else:
+                pontos = int(m)+90
+            return [pontos,classe]
 
-            n = verifica.Dois_pares(cartas)
-            if type(n) is list:
-                if n[0]=='A':
-                    pontos += 45
-                elif n[0]=='K':
-                    pontos += 44
-                elif n[0]=='Q':
-                    pontos += 43
-                elif n[0]=='J':
-                    pontos += 42
-                elif n[0]=='1':
-                    pontos += 41
-                else:
-                    pontos += int(n[0])+30
-                if n[1]=='A':
-                    pontos += 45
-                elif n[1]=='K':
-                    pontos += 44
-                elif n[1]=='Q':
-                    pontos += 43
-                elif n[1]=='J':
-                    pontos += 42
-                elif n[1]=='1':
-                    pontos += 41
-                else:
-                    pontos += int(n[1])+30
-                return pontos
+        n = verifica.Dois_pares(cartas)
+        classe = 'Dois Pares'
+        if type(n) is list:
+            if n[0]=='A':
+                pontos += 45
+            elif n[0]=='K':
+                pontos += 44
+            elif n[0]=='Q':
+                pontos += 43
+            elif n[0]=='J':
+                pontos += 42
+            elif n[0]=='1':
+                pontos += 41
+            else:
+                pontos += int(n[0])+30
+            if n[1]=='A':
+                pontos += 45
+            elif n[1]=='K':
+                pontos += 44
+            elif n[1]=='Q':
+                pontos += 43
+            elif n[1]=='J':
+                pontos += 42
+            elif n[1]=='1':
+                pontos += 41
+            else:
+                pontos += int(n[1])+30
+            return [pontos,classe]
 
-            o = verifica.Dois_pares(cartas)
-            if type(o) is list:
-                if o[0]=='A':
-                    pontos += 55
-                elif o[0]=='K':
-                    pontos += 54
-                elif o[0]=='Q':
-                    pontos += 53
-                elif o[0]=='J':
-                    pontos += 52
-                elif o[0]=='1':
-                    pontos += 51
-                else:
-                    pontos = 40+int(o[0])
 
-            p = verifica.Par(cartas)
-            if type(p) is not bool:
-                if p=='A':
-                    pontos = 35
-                elif p=='K':
-                    pontos = 34
-                elif p=='Q':
-                    pontos = 33
-                elif p=='J':
-                    pontos = 32
-                elif p=='1':
-                    pontos = 31
-                else:
-                    pontos = 20+int(p)
-                return pontos
-            
-            q = verifica.Alta(cartas)
-            if type(q) is not bool:
-                pontos = int(q)
-                return pontos
+        p = verifica.Par(cartas)
+        classe = 'Par'
+        if type(p) is not bool:
+            if p=='A':
+                pontos = 35
+            elif p=='K':
+                pontos = 34
+            elif p=='Q':
+                pontos = 33
+            elif p=='J':
+                pontos = 32
+            elif p=='1':
+                pontos = 31
+            else:
+                pontos = 20+int(p)
+            return [pontos,classe]
+        
+        q = verifica.Alta(cartas)
+        classe = 'Carta Mais Alta'
+        if type(q) is not bool:
+            pontos = int(q)
+            return [pontos,classe]
 
-            break
 
 
 
@@ -323,8 +316,8 @@ class verifica:
 
     def Alta(cartas):
         lista = []
-        for v in range(len(cartas)):
-            lista.append(cartas[v][0])
+        for v in range(1,3):
+            lista.append(cartas[-v][0])
         compara = ['A','K','Q','J','1','9','8','7','6','5','4','3','2']
         for x in range(len(compara)):
             for y in range(len(lista)):
@@ -339,7 +332,3 @@ class verifica:
 
 
 
-
-#mao = ['3♦️','8♣️']
-#mesa = ['10♦️']
-#print(verifica.testes(mesa,mao))
