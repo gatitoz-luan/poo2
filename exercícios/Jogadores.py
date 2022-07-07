@@ -32,33 +32,43 @@ class IA():
         aposta = 0
         cartas = lista[2:4]
         sorte = int(mao.verifica.testes(mesa[1],cartas))
-        
-        if sorte>100:
+        confiança = random.randint(1,21)
+        if confiança==1:
+            aposta = 0
+            lista[5] = 0
+        elif confiança == 20:
             aposta = lista[1]
-        if sorte>50:
-            if mesa[0][1]<lista[1]/5*2:
-                aposta = mesa[0][1]
-            else:
-                aposta = lista[1]/5*2
-        if sorte<=50:
-            x = random.randint(0,10)
-            if x>2:
-                if mesa[0][0]<lista[1]/5*1:
-                    if x>7:
-                        aposta = lista[1]/5*1
-                    else:
-                        aposta = mesa[0][0]
+        else:
+            if sorte>100:
+                if confiança> 10:
+                    aposta = lista[1]
+                elif confiança>5:
+                    aposta =mesa[0][1]
                 else:
-                    if x>7:
-                        aposta = mesa[0][1]
-                    else:
-                        aposta = mesa[0][0]
+                    aposta = mesa[0][0]
+            elif sorte>50:
+                if confiança> 15:
+                    aposta = lista[1]
+                elif confiança> 10:
+                    aposta = mesa[0][1]
+                elif confiança>5:
+                    aposta =mesa[0][0]
+                else:
+                    aposta = 0
             else:
-                aposta = 0
-                lista[5] = 0
+                if confiança> 15:
+                    aposta = mesa[0][1]
+                else:
+                    if mesa[0][0] < (lista[1]/2):
+                        if confiança> 10:
+                            aposta = mesa[0][0]
+                        elif confiança>5:
+                            aposta = 0
+                    else:
+                        aposta = 0
 
-        if aposta > lista[1]:
-            aposta = lista[1]
+            if aposta > lista[1]:
+                aposta = lista[1]
 
         lista[4] += aposta
         lista[1] -= aposta
